@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Welcome to Vibrant Facility Services - Home{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="hero bg-primary text-white text-center p-5">
+    <h1>Welcome to Vibrant Facility Services</h1>
+    <p>Your trusted partner in security and facility management services.</p>
+    <a href="/services/" class="btn btn-light">Explore Our Services</a>
+</div>
+
+<!-- Services Cards Section -->
+<div class="row mt-5">
+    {% for service in services %}
+        <div class="col-md-4">
+            <div class="card">
+                <!-- Check if image exists before displaying -->
+                {% if service.image %}
+                    <img src="{{ service.image.url }}" class="card-img-top" alt="{{ service.name }}">
+                {% else %}
+                    <img src="{% static 'images/default.jpg' %}" class="card-img-top" alt="Default Image">  <!-- Use a default image if no image is available -->
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ service.name }}</h5>
+                    <p class="card-text">{{ service.description }}</p>
+                    <a href="{% url 'service_detail' service_id=service.id %}" class="btn btn-primary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+
+

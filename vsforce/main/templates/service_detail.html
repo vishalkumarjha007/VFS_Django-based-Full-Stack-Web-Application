@@ -1,0 +1,23 @@
+
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ service.name }} - Service Details{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>{{ service.name }}</h1>
+    <p>{{ service.description }}</p>
+    
+    <!-- If there's an image for the service, display it -->
+    {% if service.image %}
+        <img src="{{ service.image.url }}" alt="{{ service.name }}" class="img-fluid">
+    {% else %}
+        <img src="{% static 'images/default.jpg' %}" alt="Default Image" class="img-fluid">
+    {% endif %}
+    
+    <a href="/services/" class="btn btn-secondary mt-3">Back to Services</a>
+</div>
+{% endblock %}
+

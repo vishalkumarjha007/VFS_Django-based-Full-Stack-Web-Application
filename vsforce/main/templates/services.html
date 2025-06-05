@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Our Services - VS Force{% endblock %}
+
+{% block content %}
+<h1>Our Security Services</h1>
+
+<!-- Search Form -->
+<form method="get" action="{% url 'services' %}" class="mb-4">
+    <div class="input-group">
+        <input type="text" name="q" class="form-control" placeholder="Search services..." value="{{ request.GET.q }}">
+        <button class="btn btn-primary" type="submit">Search</button>
+    </div>
+</form>
+
+<div class="service-list">
+    {% for service in services %}
+        <div class="service-item">
+            <h3>{{ service.name }}</h3>
+            <p>{{ service.description }}</p>
+            {% if service.image %}
+                <img src="{{ service.image.url }}" alt="{{ service.name }}">
+            {% endif %}
+        </div>
+    {% empty %}
+        <p>No services found.</p>
+    {% endfor %}
+</div>
+{% endblock %}
+
+

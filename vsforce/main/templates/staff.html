@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Meet Our Experts - VS Force{% endblock %}
+
+{% block content %}
+<h1>Meet Our Experts</h1>
+
+<!-- Search Form -->
+<form method="get" action="{% url 'staff' %}" class="mb-4">
+    <div class="input-group">
+        <input type="text" name="q" class="form-control" placeholder="Search staff by name or role..." value="{{ request.GET.q }}">
+        <button class="btn btn-primary" type="submit">Search</button>
+    </div>
+</form>
+
+<div class="staff-list">
+    {% for member in staff_members %}
+        <div class="staff-item">
+            <h3>{{ member.name }}</h3>
+            <p><strong>Role:</strong> {{ member.role }}</p>
+            <p><strong>Training:</strong> {{ member.training }}</p>
+            {% if member.image %}
+                <img src="{{ member.image.url }}" alt="{{ member.name }}">
+            {% endif %}
+        </div>
+    {% empty %}
+        <p>No staff found.</p>
+    {% endfor %}
+</div>
+{% endblock %}
